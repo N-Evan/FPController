@@ -15,7 +15,7 @@ public class FPCamController : MonoBehaviour
 	private void LateUpdate()
 	{
 		_lookInputValue = InputHandler.Instance.LookInput;
-		_cameraRotation.x = LookSensH * _lookInputValue.x;
+		_cameraRotation.x += LookSensH * _lookInputValue.x;
 		_cameraRotation.y = Mathf.Clamp(_cameraRotation.y - LookSensV * _lookInputValue.y, -LookLimitV, LookLimitV);
 
 		_playerTargetRotation.x += transform.eulerAngles.x + LookSensH * _lookInputValue.x;
