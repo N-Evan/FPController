@@ -20,10 +20,12 @@ namespace Outsiders.FPController.Core
 		private float _mouseSensitivity = 2.0f;
 		private float _clampRange = 80f;
 		[SerializeField] private LayerMask _groundLayers;
+		private float _antiBump;
 
 		private void Awake()
 		{
 			_charController = GetComponent<CharacterController>();
+			_antiBump = _sprintSpeed;
 		}
 
 		public void RegisterSprintButton(bool state)
@@ -34,11 +36,11 @@ namespace Outsiders.FPController.Core
 		public void HandleGravity()
 		{
 			var isGrounded = IsGrounded();
+			_verticalVelocity -= _gravity * Time.deltaTime;
 			if (isGrounded && _verticalVelocity < 0f)
 			{
-				_verticalVelocity = 0f;
+				_verticalVelocity = -_antiBump;
 			}
-			_verticalVelocity -= _gravity * Time.deltaTime;
 			
 		}
 
