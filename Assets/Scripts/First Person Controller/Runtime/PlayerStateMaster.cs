@@ -1,8 +1,9 @@
+using Outsiders.Utility;
 using UnityEngine;
 
 namespace Outsiders.FPController.Core
 {
-	public class PlayerStateMaster : MonoBehaviour
+	public class PlayerStateMaster : SingletonPersistent<PlayerStateMaster>
 	{
 		[field: SerializeField] public PlayerStates CurrentPlayerState { get; private set; } = PlayerStates.Disabled;
 

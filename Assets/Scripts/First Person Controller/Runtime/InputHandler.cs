@@ -24,6 +24,7 @@ namespace Outsiders.FPController.Core
 		public OnVector2Event OnLook;
 		public OnBoolEvent OnSprintButton;
 		public OnActionEvent OnPauseEvent;
+		public OnActionEvent OnInteractionEvent;
 
 		[SerializeField] private InputMaps _currentMap;
 		public Vector2 MoveInput;
@@ -58,6 +59,12 @@ namespace Outsiders.FPController.Core
 				OnSprintButton?.Invoke(true);
 			else if (context.canceled)
 				OnSprintButton?.Invoke(false);
+		}
+
+		public void OnInteractionAction(InputAction.CallbackContext context)
+		{
+			if (context.performed)
+				OnInteractionEvent?.Invoke();
 		}
 
 		public void OnEnterPauseUI(InputAction.CallbackContext context)
