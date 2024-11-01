@@ -15,6 +15,7 @@ public class PlayerInteractor : MonoBehaviour
 	private JobHandle _raycastHandle;
 	private bool _isInteracting;
 	private float _interactionDistance;
+	private bool _isRaycastScheduled;
 
 	private void OnEnable()
 	{
@@ -35,6 +36,10 @@ public class PlayerInteractor : MonoBehaviour
 	{
 		if (_isInteracting)
 			return;
+		if (_isRaycastScheduled && !_raycastHandle.IsCompleted)
+		{
+
+		}
 		var queryParams = new QueryParameters
 		{
 			layerMask = InteractionLayer,
@@ -47,6 +52,7 @@ public class PlayerInteractor : MonoBehaviour
 
 	public void RegisterInteractionInput()
 	{
+		Debug.Log($"Interaction Input Register");
 		if (_raycastHandle.IsCompleted)
 		{
 			_raycastHandle.Complete();
@@ -63,11 +69,12 @@ public class PlayerInteractor : MonoBehaviour
 
 	private void BeginInteraction(Observable targetObservable)
 	{
-		_isInteracting = true;
-		PlayerStateMaster.Instance.SetPlayerState(PlayerStateMaster.PlayerStates.Interacting);
+		Debug.Log($"Interaction started with {name}");
+		//_isInteracting = true;
+		//PlayerStateMaster.Instance.SetPlayerState(PlayerStateMaster.PlayerStates.Interacting);
 
-		CinemachineCam.transform.position = targetObservable.transform.position;
-		CinemachineCam.transform.LookAt(targetObservable.transform);
+		//CinemachineCam.transform.position = targetObservable.transform.position;
+		//CinemachineCam.transform.LookAt(targetObservable.transform);
 
 		//Show UI or Popup data
 		// UIManager.ShowPopup(targetObservable.GetPopupData());
