@@ -31,7 +31,7 @@ public class InputHandler : SingletonPersistent<InputHandler>
 	public void ChangeInputMap(InputMaps targetMap)
 	{
 		PlayerInputComponent.SwitchCurrentActionMap(targetMap.ToString());
-		Debug.Log($"Input map switched to {PlayerInputComponent.currentActionMap}");
+	
 		_currentMap = targetMap;
 	}
 
